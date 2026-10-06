@@ -7,20 +7,27 @@ import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
 import Dashboard from './components/Dashboard/Dashboard'
 import Landing from './components/Landing/Landing'
+import CourseDetail from './components/CourseDetail/CourseDetail';
+import AdminUsers from './components/AdminUsers/AdminUsers';
 
 // Context
 import { UserContext } from './contexts/UserContext';
 
 const App = () => {
-  const { user } = useContext(UserContext)
+  const { user, loading } = useContext(UserContext)
+  if (loading)
+    return <p>Loading...</p>;
 
-  return (
+ 
+ return (
     <>
       <NavBar />
       <Routes>
         <Route path='/' element={user ? <Dashboard /> : <Landing/> } />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
+         {user && <Route path='/courses/:courseId' element={<CourseDetail />} />}
+        {user?.role === 'admin' && <Route path='/admin/users' element={<AdminUsers />} />}
       </Routes>
     </>
   );
