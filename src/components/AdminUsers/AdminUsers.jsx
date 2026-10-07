@@ -40,29 +40,45 @@ const AdminUsers = () => {
   };
 
   return (
-    <main>
-      <h1>Manage Users</h1>
-      <p>{error}</p>
-      <ul>
-        {users.map((u) => (
-          <li key={u.id}>
+  <main>
+    <h1>Manage Users</h1>
+    <p>{error}</p>
+    <ul style={{ listStyle: 'none', padding: 0 }}>
+      {users.map((u) => (
+        <li
+          key={u.id}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+            padding: '0.5rem 0',
+            borderBottom: '1px solid #eee',
+          }}
+        >
+          <span style={{ flex: 1 }}>
             {u.username} ({u.email})
-            <select value={u.role} onChange={(e) => handleRoleChange(u.id, e.target.value)}>
-              {ROLES.map((r) => (
-                <option key={r} value={r}>{r}</option>
-              ))}
-            </select>
-            <button
-              onClick={() => handleDelete(u.id)}
-              disabled={currentUser?.id === u.id}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
-    </main>
-  );
+          </span>
+          <select
+            value={u.role}
+            onChange={(e) => handleRoleChange(u.id, e.target.value)}
+            style={{ width: '140px' }}
+          >
+            {ROLES.map((r) => (
+              <option key={r} value={r}>{r}</option>
+            ))}
+          </select>
+          <button
+            onClick={() => handleDelete(u.id)}
+            disabled={currentUser?.id === u.id}
+            style={{ width: '80px' }}
+          >
+            Delete
+          </button>
+        </li>
+      ))}
+    </ul>
+  </main>
+);
 };
 
 export default AdminUsers;
