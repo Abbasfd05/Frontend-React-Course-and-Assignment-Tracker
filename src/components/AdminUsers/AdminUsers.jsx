@@ -53,7 +53,7 @@ const AdminUsers = () => {
               ))}
             </select>
             <button
-              onClick={() => handleDelete(u.id, u.username)}
+              onClick={() => handleDelete(u.id)}
               disabled={currentUser?.id === u.id}
             >
               Delete
