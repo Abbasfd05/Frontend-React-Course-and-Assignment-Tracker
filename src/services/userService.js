@@ -44,8 +44,20 @@ const updateUserRole = async (userId, role) => {
   return data;
 };
 
+const deleteUser = async (userId) => {
+  const res = await fetch(`${BASE_URL}/users/${userId}`, {
+    method: 'DELETE',
+    headers: authHeaders(),
+  });
+  if (res.status !== 204) {
+    const data = await res.json();
+    if (data.detail) throw new Error(data.detail);
+  }
+};
+
 export {
-  currentUser,
+   currentUser,
   getUsers,
-  updateUserRole
+  updateUserRole,
+  deleteUser,
 };

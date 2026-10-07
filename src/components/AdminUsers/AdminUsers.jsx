@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
-import { getUsers, updateUserRole } from '../../services/userService';
+import { useContext, useEffect, useState } from 'react';
+import { getUsers, updateUserRole, deleteUser } from '../../services/userService';
+import { UserContext } from '../../contexts/UserContext';
 
 const ROLES = ['student', 'instructor', 'admin'];
 
 const AdminUsers = () => {
+  const { user: currentUser } = useContext(UserContext);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState('');
 
@@ -28,6 +30,18 @@ const AdminUsers = () => {
     }
   };
 
+  const handleDelete = async (id, username) => {
+    if (!window.confirm(`Delete user "${username}"? This also deletes any courses they teach and their enrollments. This cannot be undone.`)) {
+      return;
+    }
+    try {
+      await deleteUser(id);
+      load();
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <main>
       <h1>Manage Users</h1>
@@ -41,6 +55,12 @@ const AdminUsers = () => {
                 <option key={r} value={r}>{r}</option>
               ))}
             </select>
+            <button
+              onClick={() => handleDelete(u.id, u.username)}
+              disabled={currentUser?.id === u.id}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
