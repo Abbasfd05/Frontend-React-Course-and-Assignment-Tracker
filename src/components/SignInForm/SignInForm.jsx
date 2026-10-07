@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 
 import { signIn } from '../../services/authService';
-
+import { currentUser } from '../../services/userService';
 import { UserContext } from '../../contexts/UserContext';
 
 const SignInForm = () => {
@@ -22,8 +22,9 @@ const SignInForm = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      const signedInUser = await signIn(formData);
-      setUser(signedInUser);
+      await signIn(formData);
+      const profile= await currentUser();
+      setUser(profile);
       navigate('/');
     } catch (err) {
       setMessage(err.message);

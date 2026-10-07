@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 // Services
 import * as authService from '../../services/authService';
 import { UserContext } from '../../contexts/UserContext';
+import { currentUser } from '../../services/userService';
 
 
 const SignUpForm = () => {
@@ -28,10 +29,14 @@ const SignUpForm = () => {
     evt.preventDefault();
 
     const payload = { username, email, password };
-    const user = await authService.signUp(payload)
-
-    setUser(user); // this line will print the form data to the console
+    try {
+    await authService.signUp(payload)
+    const profile= await currentUser();
+    setUser(profile); // this line will print the form data to the console
     navigate('/')
+    } catch(err) {
+      setMessage(err.message)
+    }
   };
 
   const isFormInvalid = () => {
