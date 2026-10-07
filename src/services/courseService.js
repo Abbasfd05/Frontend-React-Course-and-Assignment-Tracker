@@ -51,7 +51,11 @@ const unenrollFromCourse = (id) =>
 const getEnrolledStudents = (id) =>
   fetch(`${BASE_URL}/courses/${id}/students`, { headers: authHeaders() }).then(handle);
 
+
+const getAvailableCourses = () =>
+  fetch(`${BASE_URL}/courses/available`, { headers: authHeaders() }).then(handle);
+
 export {
   getCourses, getCourse, createCourse, updateCourse, deleteCourse,
-  enrollInCourse, unenrollFromCourse, getEnrolledStudents,
+  enrollInCourse, unenrollFromCourse, getEnrolledStudents, getAvailableCourses,
 };

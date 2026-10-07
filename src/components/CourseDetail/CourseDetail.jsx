@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { UserContext } from '../../contexts/UserContext';
 import {
   getCourse, enrollInCourse, unenrollFromCourse, getEnrolledStudents,
@@ -10,6 +10,7 @@ import {
 
 const CourseDetail = () => {
   const { courseId } = useParams();
+  const navigate=useNavigate();
   const { user } = useContext(UserContext);
   const [course, setCourse] = useState(null);
   const [assignments, setAssignments] = useState([]);
@@ -50,6 +51,7 @@ const CourseDetail = () => {
   const handleUnenroll = async () => {
     try {
       await unenrollFromCourse(courseId);
+      Navigate('/');
       load();
     } catch (err) {
       setError(err.message);
