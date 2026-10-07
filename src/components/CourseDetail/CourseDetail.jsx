@@ -51,7 +51,7 @@ const CourseDetail = () => {
   const handleUnenroll = async () => {
     try {
       await unenrollFromCourse(courseId);
-      Navigate('/');
+      navigate('/');
       load();
     } catch (err) {
       setError(err.message);
@@ -87,10 +87,10 @@ const CourseDetail = () => {
       <p>{error}</p>
 
       {user.role === 'student' && (
-        <>
-          <button onClick={handleEnroll}>Enroll</button>
-          <button onClick={handleUnenroll}>Unenroll</button>
-        </>
+       <div className="button-row">
+    <button className="btn-primary" onClick={handleEnroll}>Enroll</button>
+    <button className="btn-secondary" onClick={handleUnenroll}>Unenroll</button>
+  </div>
       )}
 
       <h2>Assignments</h2>

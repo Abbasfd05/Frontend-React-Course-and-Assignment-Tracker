@@ -86,7 +86,7 @@ const Dashboard = () => {
       <ul>
         {courses.map((course) => (
           <li key={course.id}>
-            <Link to={`/courses/${course.id}`}>{course.title}</Link> — {course.semester}
+            <Link to={`/courses/${course.id}`}>{course.title}</Link> Semester: {course.semester}
             {isStudent && (
               enrolledIds.has(course.id) ? (
                 <span className="badge badge-enrolled">✓ Enrolled</span>

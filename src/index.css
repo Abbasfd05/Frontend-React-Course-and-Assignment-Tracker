@@ -148,3 +148,35 @@ p {
   color: #1f7a3f;
   border: 1px solid #b8e6c4;
 }
+.button-row {
+  display: flex;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+
+.btn-primary {
+  background: var(--accent);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: #f0f0f0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: underline;
+}
