@@ -31,9 +31,6 @@ const AdminUsers = () => {
   };
 
   const handleDelete = async (id, username) => {
-    if (!window.confirm(`Delete user "${username}"? This also deletes any courses they teach and their enrollments. This cannot be undone.`)) {
-      return;
-    }
     try {
       await deleteUser(id);
       load();
